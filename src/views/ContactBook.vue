@@ -23,17 +23,23 @@
           
           <i class="fas fa-plus"></i>Thêm mới</button>
         <button @click="removeAllContact" class="rounded bg-red-600 p-1  hover:cursor-pointer"><i class="fas fa-trash"></i>Xóa tất cả</button>
-     
-       </div>
+       
+       </div> 
+      
         </div>
   
-    <div class="p-1 min-w-3xs">
+    <div class="p-1 min-w-3xs flex flex-col space-y-1">
       <h1 class="text-xl ">
         Chi tiết liên hệ <i class="fas fa-address-card"></i>
       </h1>
       <ContactCard 
-      class=" min-h-40 border-4 border-blue-400"
+      class=" min-h-40 border-4 border-blue-400 min-w-90"
       :contact="activeContact"></ContactCard>
+      <button 
+      v-if="activeIndex!=-1"
+      class="rounded bg-amber-300 max-w-fit ml-2"
+      @click="change"
+      >Hiệu chỉnh liên hệ</button>
     </div>
        </div>
 
@@ -51,7 +57,6 @@ import {computed, ref, watch} from 'vue'
 const router = useRouter()
 const activeIndex = ref(-1)
 const searchText = ref('')
-
 const contacts = ref([''])
 
 const activeContact = computed(()=> {
@@ -78,8 +83,8 @@ try {
 } catch (error) {
   console.log(error)
 }
-
 }
+refesh()
 // refesh()
 async function removeAllContact(){
 try{
@@ -92,5 +97,9 @@ try{
 }
 function goToAddContact(){
   router.push('/contactAdd')
+}
+function change(){
+  const id = activeIndex.value
+  router.push(`/contactAdd?id=${id}`)
 }
 </script>

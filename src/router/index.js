@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import ContactBook from '@/views/ContactBook.vue'
 import ContactAdd from '@/views/ContactAdd.vue'
 import NotFound from '@/views/NotFound.vue'
+import ContactForm from '@/views/ContactForm.vue'
 const routes = [
     {
         path: "/",
@@ -9,14 +10,19 @@ const routes = [
         component: ContactBook,
     },
     {
-        path: "/Contactadd",
-        name: "ContactAdd",
-        component: ContactAdd
-    },
-    {
         path: "/:pathMach(.*)*",
         name: "not found",
         component: NotFound
+    },
+    {
+        path: "/contactAdd/:id",
+        name: "Edit",
+        component: ContactForm
+    },
+    {
+        path: "/contactAdd",
+        name: "Add",
+        component: ContactForm
     },
 ]
 const router = createRouter({
